@@ -1,0 +1,2955 @@
+use QLTS
+go
+
+create table PQ_NhomQuyen(
+Id_NQ int identity not null primary key,
+Ten nvarchar(50),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QT_NhomQuyen;
+
+create table PQ_NhomQuyen_TK(
+ID int identity not null primary key,
+Id_TK int,
+Id_NQ int,
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QT_NhomQuyen_TK;
+
+create table PQ_ChucNang(
+Id_CN int identity not null primary key,
+MoTa nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QT_ChucNang;
+
+create table PQ_NhomQuyen_CN(
+ID int identity not null primary key,
+Id_TK int,
+Id_NQ int,
+Xem bit default 1,
+Them bit default 1,
+Sua bit default 1,
+Xoa bit default 1,
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table PQ_NhomQuyen_CN;
+
+create table PQ_TaiKhoan(
+Id_TK int identity primary key,
+TenTK nvarchar(50),
+MatKhau nvarchar(50),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QT_TaiKhoan;
+
+create table QT_PhongBan(
+Id_PB int primary key IDENTITY not null,
+TenPB nvarchar(50),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table PhongBan;
+
+create table QT_NhanVien(
+Id_NV int primary key identity not null,
+Id_PB int ,
+TenNV nvarchar(50),
+NgaySinh date,
+SDT nvarchar(20),
+Mail nvarchar(50),
+ChucVu nvarchar(10),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table NhanVien;
+
+update NhanVien
+set SDT = '0326665555'
+where MaNV = 'XEP01'
+
+ALTER TABLE PQ_NhomQuyen_CN
+ALTER COLUMN SDT nvarchar(20)
+
+create table CT_ChiTietLoaiTS(
+Id_Loai int primary key identity not null,
+Ten nvarchar(100),
+PhanLoai nvarchar(100),
+MoTa nvarchar(150),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+ALTER TABLE ChiTietPhanLoaiTS
+ADD NgayKhoiTao date,
+TKKhoiTao nvarchar(20),
+NgayChinhSuaGanNhat date,
+TKChinhSua nvarchar(20),
+MucDaXoa bit;
+
+drop table ChiTietLoaiTS;
+
+create table CT_NhanHieu(
+Id_NH int primary key identity not null,
+Ten nvarchar(100),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table NhanHieu;
+
+create table QT_TaiSan(
+Id_TS int primary key identity not null,
+MaTS nvarchar(50),
+Id_PT int,
+TenTS nvarchar(50),
+Id_NH int,
+Id_Loai int,
+MoTa nvarchar(200),
+Model nvarchar(20),
+SoLuong int,
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QT_TaiSan;
+
+create table CT_Kho(
+Id_Kho int primary key identity not null,
+MoTa nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table CT_Kho;
+
+create table QL_ThuHoiTS(
+ID int primary key identity not null,
+Id_PTH int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table CT_Kho;
+
+create table QL_PhieuThuHoiTS(
+Id_PTH int primary key identity not null,
+SoPhieuTH nvarchar(200),
+NgayThuHoi datetime,
+Id_NhanVien int,
+Id_Kho int,
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table CT_Kho;
+
+create table QL_PhieuXuat(
+Id_PX int primary key identity not null,
+SoPhieuXuat nvarchar(200),
+NgayXuat datetime,
+ViTriSuDung bit default null,
+Id_PB int,
+Id_NV int,
+Id_Kho int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_PhieuXuat;
+
+create table QL_XuatTS(
+ID int primary key identity not null,
+Id_PX int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_XuatTS;
+
+create table QL_NhapTS(
+ID int primary key identity not null,
+Id_PN int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_NhapTS;
+
+create table QL_PhieuNhap(
+Id_PN int primary key identity not null,
+SoPhieuNhap nvarchar(50),
+NgayNhap datetime,
+Id_NV int,
+Id_TK int,
+Id_Kho int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_PhieuNhap;
+
+create table QL_ThanhLyTS(
+ID int primary key identity not null,
+Id_PTL int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_PhieuNhap;
+
+create table QL_PhieuThanhLy(
+Id_PTL int primary key identity not null,
+SoPhieuThanhLy nvarchar(50),
+NgayThanhLy datetime,
+Id_NV int,
+Id_Kho int,
+DienGiai nvarchar(200),
+NgayKhoiTao datetime Default Getdate(),
+TKKhoiTao nvarchar(50) default current_user,
+NgayChinhSuaGanNhat datetime,
+TKChinhSua nvarchar(50),
+MucDaXoa bit default 0)
+
+drop table QL_PhieuThanhLy;
+
+create table ChiTietPhieuXuat(
+ID int primary key identity not null,
+Id_TS int,
+TenTS nvarchar(50))
+
+drop table ChiTietPhieuXuat;
+
+create table ChiTietPhieuThu(
+ID int primary key identity not null,
+Id_TS int,
+TenTS nvarchar(50))
+
+drop table ChiTietPhieuThu;
+
+create table ChiTietPhieuNhap(
+ID int primary key identity not null,
+Id_TS int,
+TenTS nvarchar(50))
+
+drop table ChiTietPhieuNhap;
+
+create table ChiTietPhieuThanhLy(
+ID int primary key identity not null,
+Id_TS int,
+TenTS nvarchar(50))
+
+drop table ChiTietPhieuThanhLy;
+
+
+
+delete from NhomTK where NhomQuyen = 'ADMIN1';
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+insert into NhomTK(NhomQuyen,ChucNang)
+values ('ADMIN2',N'Tạo các tài khoản đăng nhập'),
+('ADMIN',N'Tạo các bảng mới',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1',''),
+('ADMIN',N'Xóa các mục đã đánh dấu',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1',''),
+('ADMIN',N'Phân nhóm quyền',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1',''),
+('ADMIN',N'Chỉnh sửa bảng Phòng Ban, Nhân Viên',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1',''),
+(N'Nhập liệu',N'Cập nhật DL bảng Nhập mới TS,Xuất sử dụng TS',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1',''),
+(N'Nhập liệu',N'Cập nhật DL bảng Thu hồi TS, Thanh lý TS',GETDATE(),'ADMIN1',GETDATE(),'ADMIN1','');
+
+insert into NhomTK(NhomQuyen, ChucNang)
+values('ADMIN',N'Chỉnh sửa thông tin tài khoản, Tạo các bảng mới, Xóa các mục đã đánh dấu, Phân nhóm quyền, Chỉnh sửa bảng Phòng Ban, Nhân Viên'),
+(N'Nhập liệu',N'Cập nhật dữ liệu các bảng TS, Chi tiết TS, Cập nhật DL bảng Nhập mới TS,Xuất sử dụng TS, Cập nhật DL bảng Thu hồi TS, Thanh lý TS'),
+(N'Báo cáo',N'Xem tất cả DL ngoại trừ Tài khoản, Chức năng');
+
+delete from NhomTK
+
+update NhomTK
+set ChucNang = N'Báo cáo'
+where NhomQuyen = 'ADMIN1'
+
+insert into PQ_NhomQuyen_TK(Id_TK, Id_NQ)
+values(4,1),
+(1,2)
+
+insert into PQ_NhomQuyen_CN(Id_CN, Id_NQ,Xem,Them,Sua,Xoa)
+values(1,1,1,1,1,1)
+
+insert into TaiKhoan(TenTK,MatKhau,NhomQuyen)
+values ('ADMIN11','123','ADMIN'),
+('nhaplieu1','123',N'Nhập liệu'),
+('baocao1','123',N'Báo cáo');
+
+delete from TaiKhoan
+
+update TaiKhoan
+set NhomQuyen = N'Báo cáo'
+where TenTK = 'ADMIN4'
+
+delete from TaiKhoan
+where TenTK = 'ADMIN4'
+
+insert into PhongBan (TenPhongBan, SoNguoi)
+values (N'Ban lãnh đạo',3),
+(N'Phòng hành chính - nhân sự',8),
+(N'Phòng kế toán',6),
+(N'Phòng công nghệ',33),
+(N'Phòng Marketing',6)
+
+delete from PhongBan
+
+insert into NhanVien (MaPhongBan, TenNV, NgaySinh,SDT,Mail,ChucVu)
+values (6,N'Trịnh Minh Vương','1992-06-25',0326665555,'vuongtv@gmail.com',N'Tổng giám đốc')
+insert into NhanVien (MaPhongBan, TenNV, NgaySinh,SDT,Mail,ChucVu)
+values(6,N'Nguyễn Trọng Nam','2000-07-24',0922113675,'nammet@gmail.com',N'Phó tổng giám đốc'),
+insert into NhanVien (MaPhongBan, TenNV, NgaySinh,SDT,Mail,ChucVu)
+values(6,N'Trần Thị Huyền','2000-06-12',0868326342,'nammet@gmail.com',N'Thư ký phó tổng giám đốc')
+
+insert into NhanVien(MaNV,MaPhongBan,TenNV,NgaySinh,SDT,Mail,ChucVu,MucDaXoa)
+values ('NV01','Phong 04',N'Hồ Thành Vinh','1999-08-15',1985246325,'vinhht@gmail.com',N'Nhân viên phong công nghệ','')
+
+insert into ChiTietPhanLoaiTS(Ten,MoTa)
+values (N'Bàn phòng họp',N'Bàn dành cho phòng họp gồm 8 vị trí ngồi')
+insert into ChiTietPhanLoaiTS(Ten,MoTa)
+values(N'Bàn làm việc của xếp',N'Bàn dành cho xếp rộng và lớn')
+insert into ChiTietPhanLoaiTS(Ten,MoTa)
+values(N'Bàn làm việc nhân viên',N'Bàn chữ nhật dài gồm 8 vị trí ngồi')
+
+insert into ChiTietPhanLoaiTS(MaLoai,Ten,MoTa,MucDaXoa)
+values ('GHE01',N'Ghế tựa',N'Ghế tựa dành cho nhân viên','')
+
+update ChiTietPhanLoaiTS
+set MoTa = N'Ghế tựa lưng'
+where Maloai = 'GHE01'
+
+delete from ChiTietPhanLoaiTS;
+
+insert into TaiSan(MaLoai,TenTS,NhanHieu,MoTa,Model,SoLuong)
+values (1,N'Bàn',N'KOAS',N'Bàn phòng họp','1234',4)
+insert into TaiSan(MaLoai,TenTS,NhanHieu,MoTa,Model,SoLuong)
+values (2,N'Bàn',N'KOAS',N'Bàn làm việc','4321',3)
+insert into TaiSan(MaLoai,TenTS,NhanHieu,MoTa,Model,SoLuong)
+values (3,N'Bàn',N'KOAS',N'Bàn làm việc','3241',9)
+
+Update TaiSan
+set Model = 'H1206200'
+where MaTS = 1
+
+insert into XuatSuDungTaiSan (MaTS,SoLuong,MaPhongBan,MaNV,NgayXuat)
+values (2,3,6,null,GETDATE())
+insert into XuatSuDungTaiSan (MaTS,SoLuong,MaPhongBan,MaNV,NgayXuat)
+values(3,2,7,null,GETDATE())
+insert into XuatSuDungTaiSan (MaTS,SoLuong,MaPhongBan,MaNV,NgayXuat)
+values(1,4,null,null,GETDATE())
+
+insert into XuatSuDungTaiSan(MaTS,SoLuong,MaPhongBan,MaNV,NgayXuat,MucDaXoa) 
+values ('B03',3,'Phong 04',null,'2022-06-12','')
+
+insert into NhapMoiTaiSan
+values ('B01',1,'KOAS',GETDATE(),GETDATE(),'ADMIN1',GETDATE(),'ADMIN1','')
+
+insert into NhapMoiTaiSan(MaTS,SoLuong,NhanHieu,NgayNhap)
+values (2,2,'KOAS',Getdate())
+insert into NhapMoiTaiSan(MaTS,SoLuong,NhanHieu,NgayNhap)
+values (1,2,'KOAS',Getdate())
+
+insert into ThanhLyTaiSan(MaTS,SoLuong,NhanHieu,NgayThanhLy)
+values (2,5,'KOAS','2022-06-12')
+
+insert into ThuHoiTaiSan(MaTS,SoLuong,MaPhongBan,MaNV,NgayThuHoi) 
+values (2,3,6,null,'2022-06-12')
+insert into ThuHoiTaiSan(MaTS,SoLuong,MaPhongBan,MaNV,NgayThuHoi) 
+values (1,3,6,null,'2022-06-12')
+
+
+
+select * from [QLTS].[dbo].[TaiSan]
+
+-------------------------------------Đổi tên tk, mk
+ALTER LOGIN quantrimang
+WITH NAME = 'hocsqlserver';
+
+ALTER LOGIN login_name
+WITH PASSWORD = 'password';
+---------------------------------------Thêm tiền tố
+Select [id],[Full Name] = case Gender
+when 'm' then 'Mr. '+[First name]+ ' '+[Last name]
+when 'f' then 'Ms. '+[First name]+ ' '+[Last name]
+end
+from Emp
+----------------------------------------------Xóa tài khoản đăng nhập
+DROP USER nammet8;
+DROP LOGIN nammet8;
+------------------------------------------------Tạo tài khoản đăng nhập
+CREATE LOGIN [ten_mien\ten_dangnhap]
+FROM WINDOWS 
+[ WITH DEFAULT_DATABASE = ten_cosodulieu 
+| DEFAULT_LANGUAGE = ten_ngonngu];
+------------------Tạo tk login vào database và tạo user
+exec inserted_PQ_TaiKhoan 0, 'Vinhh', '123', N'Toàn quyền'
+create proc tao
+(@tk nvarchar(100),@mk nvarchar(100))
+as
+begin
+CREATE LOGIN @tk
+WITH PASSWORD = @mk
+CREATE USER @tk FOR LOGIN @tk
+end
+-------------------------------------------Cấp quyền người dùng
+GRANT ALL On  [QLTS].[dbo].[CT_ChiTietLoaiTS] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[CT_Kho] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[CT_NhanHieu] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_ChucNang] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen_CN] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen_TK] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_TaiKhoan] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuNhap] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThanhLy] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThanhLy_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThuHoi] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThuHoi_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuXuat] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuXuat_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_NhanVien] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_PhongBan] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_TaiSan] TO Vinhh;
+
+GRANT EXECUTE ON SCHEMA::dbo
+    TO Vinhh;
+
+CREATE LOGIN Vinhh
+WITH PASSWORD = '123';
+
+CREATE USER Vinhh FOR LOGIN Vinhh;
+
+-------------------------------------------Cấp quyền người dùng
+GRANT ALL On  [QLTS].[dbo].[CT_ChiTietLoaiTS] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[CT_Kho] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[CT_NhanHieu] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_ChucNang] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen_CN] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_NhomQuyen_TK] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[PQ_TaiKhoan] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuNhap] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThanhLy] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThanhLy_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThuHoi] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuThuHoi_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuXuat] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QL_PhieuXuat_ChiTiet] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_NhanVien] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_PhongBan] TO Vinhh;
+GRANT ALL On  [QLTS].[dbo].[QT_TaiSan] TO Vinhh;
+
+GRANT EXECUTE ON SCHEMA::dbo
+    TO Vinhh;
+
+GRANT DELETE ALL TABLE TO nammet4;
+GRANT ALL ON ANY TO Vinhh;
+
+--------------------------------------------Thu hồi quyền
+REVOKE quyen ON doi_tuong FROM nguoi_dung;
+-------------------------------------------
+------------------------------------------------trả về tên người dùng của phiên hiện tại
+SELECT SESSION_USER;
+SELECT SYSTEM_USER;
+SELECT USER_NAME(5);
+--------------------------------
+SELECT CURRENT_USER;
+---------------------------------------------------
+Exec sp_addserverrolemember 'Martin Reid', 'SysAdmin';
+---------------------------------------------------------------Trigger
+--------------------------------AUTO insert TK
+create Trigger Auto_insert_TaiKhoan
+on TaiKhoan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = TenTK 
+from inserted
+update TaiKhoan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where TenTK = @saoluu
+
+drop Trigger Auto_insert_TaiKhoan
+--------------------------------AUTO insert nhomTK
+create Trigger Auto_insert_NhomTK
+on NhomTK
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = NhomQuyen
+from inserted
+update NhomTK
+set NgayKhoiTao = Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where NhomQuyen = @saoluu
+
+drop Trigger Auto_insert_NhomTK
+--------------------------------AUTO insert ChiTietPhanLoaiTS
+create Trigger Auto_insert_ChiTietPhanLoaiTS
+on ChiTietPhanLoaiTS
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaLoai
+from inserted
+update ChiTietPhanLoaiTS
+set NgayKhoiTao = Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaLoai = @saoluu
+
+drop Trigger Auto_insert_ChiTietPhanLoaiTS
+--------------------------------AUTO insert NhanVien
+create Trigger Auto_insert_NhanVien
+on NhanVien
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaNV
+from inserted
+update NhanVien
+set NgayKhoiTao = Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaNV = @saoluu
+
+drop Trigger Auto_insert_NhanVien
+--------------------------------AUTO insert NhapMoiTaiSan
+create Trigger Auto_insert_NhapMoiTaiSan
+on NhapMoiTaiSan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+update NhapMoiTaiSan
+set NgayKhoiTao =Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaTS = @saoluu
+
+drop Trigger Auto_insert_NhapMoiTaiSan
+--------------------------------AUTO insert PhongBan
+create Trigger Auto_insert_PhongBan
+on PhongBan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaPhongBan
+from inserted
+update PhongBan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao = CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaPhongBan = @saoluu
+
+drop Trigger Auto_insert_PhongBan
+--------------------------------AUTO insert TaiSan
+create Trigger Auto_insert_TaiSan
+on TaiSan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+update TaiSan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao =CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaTS = @saoluu
+
+drop Trigger Auto_insert_TaiSan
+--------------------------------AUTO insert ThanhLyTaiSan
+create Trigger Auto_insert_ThanhLyTaiSan
+on ThanhLyTaiSan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+update ThanhLyTaiSan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao =CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where MaTS = @saoluu
+
+drop Trigger Auto_insert_ThanhLyTaiSan
+--------------------------------AUTO insert ThuHoiTaiSan
+create Trigger Auto_insert_ThuHoiTaiSan
+on ThuHoiTaiSan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = NgayThuHoi
+from inserted
+update ThuHoiTaiSan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao =CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where NgayThuHoi = @saoluu
+
+drop Trigger Auto_insert_ThuHoiTaiSan
+--------------------------------AUTO insert XuatSuDungTaiSan
+create Trigger Auto_insert_XuatSuDungTaiSan
+on XuatSuDungTaiSan
+for insert
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = NgayXuat
+from inserted
+update XuatSuDungTaiSan
+set NgayKhoiTao = Getdate(),
+TKKhoiTao =CURRENT_USER,
+NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+MucDaXoa = ''
+where NgayXuat = @saoluu
+
+drop Trigger Auto_insert_XuatSuDungTaiSan
+--------------------------------AUTO update TaiKhoan
+create Trigger Auto_update_TaiKhoan
+on TaiKhoan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = TenTK
+from inserted
+if update(MatKhau)
+or update(NhomQuyen)
+or update(MucDaXoa)
+update TaiKhoan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where TenTK = @saoluu
+
+drop Trigger Auto_update_TaiKhoan
+--------------------------------AUTO update NhomTK
+create Trigger Auto_update_NhomTK
+on NhomTK
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = NhomQuyen
+from inserted
+if update(ChucNang)
+or update(MucDaXoa)
+update NhomTK
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where NhomQuyen = @saoluu
+
+drop Trigger Auto_update_NhomTK
+--------------------------------AUTO update ChiTietPhanLoaiTS
+create Trigger Auto_update_ChiTietPhanLoaiTS
+on ChiTietPhanLoaiTS
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaLoai
+from inserted
+if update(Ten)
+or update(MoTa)
+or update(MucDaXoa)
+update ChiTietPhanLoaiTS
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaLoai = @saoluu
+
+drop Trigger Auto_update_ChiTietPhanLoaiTS
+--------------------------------AUTO update NhVien
+create Trigger Auto_update_NhanVien
+on NhanVien
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaNV
+from inserted
+if update(MaPhongBan)
+or update(TenNV)
+or update(NgaySinh)
+or update(SDT)
+or update(Mail)
+or update(ChucVu)
+or update(MucDaXoa)
+update NhanVien
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaNV = @saoluu
+
+drop Trigger Auto_update_NhanVien
+--------------------------------AUTO update NhapMoiTaiSan
+create Trigger Auto_update_NhapMoiTaiSan
+on NhapMoiTaiSan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+if update(SoLuong)
+or update(NhanHieu)
+or update(NgayNhap)
+or update(MucDaXoa)
+update NhapMoiTaiSan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaTS = @saoluu
+
+drop Trigger Auto_update_NhapMoiTaiSan
+--------------------------------AUTO update PhongBan
+create Trigger Auto_update_PhongBan
+on PhongBan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaPhongBan
+from inserted
+if update(TenPhongBan)
+or update(SoNguoi)
+or update(MucDaXoa)
+update PhongBan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaPhongBan = @saoluu
+
+drop Trigger Auto_update_PhongBan
+
+--------------------------------AUTO update TaiSan
+create Trigger Auto_update_TaiSan
+on TaiSan
+for update
+as
+Declare @saoluu nvarchar(50)
+Declare @saoluu1 int
+Declare @saoluu2 int 
+Declare @saoluu3 int
+select @saoluu = MaTS
+from inserted
+select @saoluu1 = SoLuong
+from NhapMoiTaiSan
+where NhapMoiTaiSan.MaTS = @saoluu 
+select @saoluu2 = SoLuong
+from ThuHoiTaiSan
+where ThuHoiTaiSan.MaTS = @saoluu 
+select @saoluu3 = SoLuong
+from XuatSuDungTaiSan
+where XuatSuDungTaiSan.MaTS = @saoluu 
+
+if update(MaLoai)
+or update(TenTS)
+or update(NhanHieu)
+or update(MoTa)
+or update(Model)
+or update(MucDaXoa)
+update TaiSan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER,
+SoLuong = @saoluu1 + @saoluu2 + @saoluu3
+where MaTS = @saoluu
+
+drop Trigger Auto_update_TaiSan
+--------------------------------AUTO update ThanhLyTaiSan
+create Trigger Auto_update_ThanhLyTaiSan
+on ThanhLyTaiSan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+if update(SoLuong)
+or update(NhanHieu)
+or update(NgayThanhLy)
+or update(MucDaXoa)
+update ThanhLyTaiSan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaTS = @saoluu
+
+drop Trigger Auto_update_ThanhLyTaiSan
+--------------------------------AUTO update ThuHoiTaiSan
+create Trigger Auto_update_ThuHoiTaiSan
+on ThuHoiTaiSan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+if update(SoLuong)
+or update(MaPhongBan)
+or update(MaNV)
+or update(NgayThuHoi)
+or update(MucDaXoa)
+update ThuHoiTaiSan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaTS = @saoluu
+
+drop Trigger Auto_update_ThuHoiTaiSan
+--------------------------------AUTO update XuatSuDungTaiSan
+create Trigger Auto_update_XuatSuDungTaiSan
+on XuatSuDungTaiSan
+for update
+as
+Declare @saoluu nvarchar(50)
+select @saoluu = MaTS
+from inserted
+if update(SoLuong)
+or update(MaPhongBan)
+or update(MaNV)
+or update(NgayXuat)
+or update(MucDaXoa)
+update XuatSuDungTaiSan
+set NgayChinhSuaGanNhat = Getdate(),
+TKChinhSua = CURRENT_USER
+where MaTS = @saoluu
+
+drop Trigger Auto_update_XuatSuDungTaiSan
+
+--------------------------------insert Login
+create function insert_login 
+(@tenTK nvarchar(50), @matKhau nvarchar(50))
+RETURNS VARCHAR(50)
+AS
+BEGIN
+CREATE LOGIN @tenTK WITH PASSWORD  @matKhau;
+CREATE USER @tenTK FOR LOGIN @tenTK;
+RETURN @tenTK
+END
+
+drop Trigger Auto_insert_TaiKhoan
+-------------------------------------------------------------------Stored Procedure, function
+--------------------------------insert Login
+create proc ins_login
+@tentk nvarchar(50),
+@matkhau nvarchar (50)
+as
+CREATE LOGIN @tentk WITH PASSWORD = @matKhau;
+CREATE USER @tentk FOR LOGIN @tentk;
+-------------------------------------------------------------------------select TaiKhoan
+create proc select_PQ_TaiKhoan
+as
+begin
+select Id_TK,TenTK,MatKhau,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from PQ_TaiKhoan
+end
+
+drop proc select_PQ_TaiKhoan
+
+exec  select_PQ_TaiKhoan
+--------------------------------select TaiKhoanTK
+create proc select_TaiKhoanTK
+(@maTK int)
+as
+begin
+select *
+from TaiKhoan
+where TaiKhoan.MaTK = @maTK
+end
+
+drop proc select_TaiKhoanTK
+
+exec  select_TaiKhoanTK 5
+--------------------------------select TaiKhoanTK
+create proc select_PQ_TaiKhoan1
+(@maTK int)
+as
+begin
+select *
+from PQ_TaiKhoan
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc select_PQ_TaiKhoan1
+
+exec  select_PQ_TaiKhoan1 2
+----------------------------------insert TaiKhoan
+create proc insert_PQ_TaiKhoan
+(@ten nvarchar(50),@mk nvarchar(50))
+as
+begin
+insert into PQ_TaiKhoan (TenTK, MatKhau)
+values( @ten, @mk)
+end
+
+drop proc insert_PQ_TaiKhoan
+
+exec  insert_PQ_TaiKhoan 'ADMIN3', '123'
+--------------------------------update TaiKhoan
+create proc update_PQ_TaiKhoan
+(@maTK int,@tenTK nvarchar(50),@mk nvarchar(50))
+as
+begin
+update PQ_TaiKhoan
+set PQ_TaiKhoan.TenTK = @tenTK, PQ_TaiKhoan.MatKhau = @mk
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc update_PQ_TaiKhoan
+
+exec  update_PQ_TaiKhoan 2,'ADMIN4','123'
+--------------------------------delete TaiKhoan
+create proc delete_PQ_TaiKhoan
+(@maTK int)
+as
+begin
+delete from PQ_TaiKhoan
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc delete_PQ_TaiKhoan
+
+exec  delete_PQ_TaiKhoan 1
+--------------------------------------------------------------------------select PQ_NhomQuyen
+create proc select_PQ_NhomQuyen
+as
+begin
+select *
+from PQ_NhomQuyen
+end
+
+drop proc select_PQ_NhomQuyen
+
+exec  select_PQ_NhomQuyen
+----------------------------------insert PQ_NhomQuyen
+create proc insert_PQ_NhomQuyen
+(@cn nvarchar(100))
+as
+begin
+insert into PQ_NhomQuyen (Ten)
+values( @cn)
+end
+
+drop proc insert_PQ_NhomQuyen
+
+exec  insert_PQ_NhomQuyen 'ADMIN'
+--------------------------------update PQ_NhomQuyen
+create proc update_PQ_NhomQuyen
+(@id int,@cn nvarchar(100))
+as
+begin
+update PQ_NhomQuyen
+set PQ_NhomQuyen.Ten = @cn
+where PQ_NhomQuyen.Id_NQ = @id
+end
+
+drop proc update_PQ_NhomQuyen
+
+exec  update_PQ_NhomQuyen 1,'ADMIN'
+--------------------------------delete PQ_NhomQuyen
+create proc delete_PQ_NhomQuyen
+(@nq int)
+as
+begin
+delete from PQ_NhomQuyen
+where PQ_NhomQuyen.Id_NQ = @nq
+end
+
+drop proc delete_PQ_NhomQuyen
+
+exec  delete_PQ_NhomQuyen 2
+-------------------------------------------------------------------------select PQ_ChucNang
+create proc select_PQ_ChucNang
+as
+begin
+select *
+from PQ_ChucNang
+end
+
+drop proc select_PQ_ChucNang
+
+exec  select_PQ_ChucNang
+----------------------------------insert PQ_ChucNang
+create proc insert_PQ_ChucNang
+(@sn nvarchar(100))
+as
+begin
+insert into PQ_ChucNang (MoTa)
+values(@sn)
+end
+
+drop proc insert_PQ_ChucNang
+
+exec  insert_PQ_ChucNang 'Test'
+--------------------------------update PQ_ChucNang
+create proc update_PQ_ChucNang
+(@ma int,@ten nvarchar(100))
+as
+begin
+update PQ_ChucNang
+set PQ_ChucNang.MoTa = @ten
+where PQ_ChucNang.Id_CN = @ma
+end
+
+drop proc update_PQ_ChucNang
+
+exec  update_PQ_ChucNang 2,'Test2'
+--------------------------------delete PQ_ChucNang
+create proc delete_PQ_ChucNang
+(@ma int)
+as
+begin
+delete from PQ_ChucNang
+where PQ_ChucNang.Id_CN = @ma
+end
+
+drop proc delete_PQ_ChucNang
+
+exec  delete_PQ_ChucNang 3
+-------------------------------------------------------------------------select PQ_NhomQuyen_CN
+create proc select_PQ_NhomQuyen_CN
+as
+begin
+select *
+from PQ_NhomQuyen_CN
+end
+
+drop proc select_PQ_NhomQuyen_CN
+
+exec  select_PQ_NhomQuyen_CN
+----------------------------------insert PQ_NhomQuyen_CN
+create proc insert_PQ_NhomQuyen_CN
+(@idnq int,@idcn int)
+as
+begin
+insert into PQ_NhomQuyen_CN (Id_NQ,Id_CN)
+values( @ten, @mt)
+end
+
+drop proc insert_PQ_NhomQuyen_CN
+
+exec  insert_PQ_NhomQuyen_CN 'ADMIN1','haizzzzz'
+--------------------------------update ChiTietPhanLoaiTS
+create proc update_ChiTietPhanLoaiTS
+(@ma int,@ten nvarchar(50),@mt nvarchar(100))
+as
+begin
+update ChiTietPhanLoaiTS
+set ChiTietPhanLoaiTS.Ten = @ten, ChiTietPhanLoaiTS.MoTa = @mt
+where ChiTietPhanLoaiTS.MaLoai = @ma
+end
+
+drop proc update_ChiTietPhanLoaiTS
+
+exec  update_ChiTietPhanLoaiTS 4,'ADMIN5','test'
+--------------------------------delete ChiTietPhanLoaiTS
+create proc delete_ChiTietPhanLoaiTS
+(@ma int)
+as
+begin
+delete from ChiTietPhanLoaiTS
+where ChiTietPhanLoaiTS.MaLoai = @ma
+end
+
+drop proc delete_ChiTietPhanLoaiTS
+
+exec  delete_ChiTietPhanLoaiTS 4
+-------------------------------------------------------------------------select NhanVien
+create proc select_NhanVien
+as
+begin
+select *
+from NhanVien
+end
+
+drop proc select_NhanVien
+
+exec  select_NhanVien
+----------------------------------insert NhanVien
+create proc insert_NhanVien
+(@mapb int,@ten nvarchar(50),@ns date,@sdt nvarchar(20),@mail nvarchar(50),@cv nvarchar(50))
+as
+begin
+insert into NhanVien (MaPhongBan,TenNV,NgaySinh,SDT,Mail,ChucVu)
+values( @mapb,@ten,@ns,@sdt,@mail, @cv)
+end
+
+drop proc insert_NhanVien
+
+exec  insert_NhanVien 7,N'Đoàn Văn Duy','2000-08-09','0856147963','duydv@gmail.com','Quán lý nhân sự'
+--------------------------------update NhanVien
+create proc update_NhanVien
+(@ma int,@mapb int,@ten nvarchar(50),@ns date,@sdt nvarchar(20),@mail nvarchar(50),@cv nvarchar(50))
+as
+begin
+update NhanVien
+set NhanVien.MaPhongBan = @mapb, NhanVien.TenNV = @ten, NhanVien.NgaySinh = @ns, NhanVien.SDT = @sdt, NhanVien.Mail = @mail,NhanVien.ChucVu = @cv
+where NhanVien.MaNV = @ma
+end
+
+drop proc update_NhanVien
+
+exec  update_NhanVien 4,6,N'Trần Thị Huyền','2000-06-12','0868326342','huyendethuong@gmail.com',N'Thư ký phó tổng giám đốc'
+--------------------------------delete NhanVien
+create proc delete_NhanVien
+(@ma int)
+as
+begin
+delete from NhanVien
+where NhanVien.MaNV = @ma
+end
+
+drop proc delete_NhanVien
+
+exec  delete_NhanVien 1
+-------------------------------------------------------------------------select NhapMoiTaiSan
+create proc select_NhapMoiTaiSan
+as
+begin
+select *
+from NhapMoiTaiSan
+end
+
+drop proc select_NhapMoiTaiSan
+
+exec  select_NhapMoiTaiSan
+----------------------------------insert NhapMoiTaiSan
+create proc insert_NhapMoiTaiSan
+(@ma int,@sl int,@nh nvarchar(50),@nn date)
+as
+begin
+insert into NhapMoiTaiSan (MaTS,SoLuong,NhanHieu,NgayNhap)
+values( @ma,@sl,@nh,@nn)
+end
+
+drop proc insert_NhapMoiTaiSan
+
+exec  insert_NhapMoiTaiSan 3,5,N'KOAS','2022-06-17'
+--------------------------------update NhapMoiTaiSan
+create proc update_NhapMoiTaiSan
+(@ma int,@sl int,@nh nvarchar(50),@nn date)
+as
+begin
+update NhapMoiTaiSan
+set NhapMoiTaiSan.SoLuong = @sl, NhapMoiTaiSan.NhanHieu = @nh, NhapMoiTaiSan.NgayNhap = @nn
+where NhapMoiTaiSan.MaTS = @ma
+end
+
+drop proc update_NhapMoiTaiSan
+
+exec  update_NhapMoiTaiSan 2,1,N'KOAS','2000-06-12'
+--------------------------------delete NhapMoiTaiSan
+create proc delete_NhapMoiTaiSan
+(@ma int)
+as
+begin
+delete from NhapMoiTaiSan
+where NhapMoiTaiSan.MaTS = @ma
+end
+
+drop proc delete_NhapMoiTaiSan
+
+exec  delete_NhapMoiTaiSan 4
+-------------------------------------------------------------------------select TaiSan
+create proc select_TaiSan
+as
+begin
+select *
+from TaiSan
+end
+
+drop proc select_TaiSan
+
+exec  select_TaiSan
+----------------------------------insert TaiSan
+create proc insert_TaiSan
+(@maloai int,@ten nvarchar(50),@nh nvarchar(50),@mt nvarchar(50),@md nvarchar(50))
+as
+begin
+insert into TaiSan (MaLoai,TenTS,NhanHieu,MoTa,Model)
+values( @maloai,@ten,@nh,@mt,@md)
+end
+
+drop proc insert_TaiSan
+
+exec  insert_TaiSan 3,N'Bàn','KOAS','Bàn làm việc','5678'
+--------------------------------update TaiSan
+create proc update_TaiSan
+(@ma int,@maloai int,@ten nvarchar(50),@nh nvarchar(50),@mt nvarchar(50),@md nvarchar(50))
+as
+begin
+update TaiSan
+set TaiSan.MaLoai = @maloai, TaiSan.TenTS = @ten, TaiSan.NhanHieu = @nh, TaiSan.MoTa = @mt, TaiSan.Model = @md
+where TaiSan.MaTS = @ma
+end
+
+drop proc update_TaiSan
+
+exec  update_TaiSan 4,2,N'Bàn','KOAS','Bàn làm việc','5678'
+--------------------------------delete TaiSan
+create proc delete_TaiSan
+(@ma int)
+as
+begin
+delete from TaiSan
+where TaiSan.MaTS = @ma
+end
+
+drop proc delete_TaiSan
+
+exec  delete_TaiSan 4
+-------------------------------------------------------------------------select ThanhLyTaiSan
+create proc select_ThanhLyTaiSan
+as
+begin
+select *
+from ThanhLyTaiSan
+end
+
+drop proc select_ThanhLyTaiSan
+
+exec  select_ThanhLyTaiSan
+----------------------------------insert ThanhLyTaiSan
+create proc insert_ThanhLyTaiSan
+(@ma int,@sl int,@nh nvarchar(50),@ntl date)
+as
+begin
+insert into ThanhLyTaiSan (MaTS,SoLuong,NhanHieu,NgayThanhLy)
+values( @ma,@sl,@nh,@ntl)
+end
+
+drop proc insert_ThanhLyTaiSan
+
+exec  insert_ThanhLyTaiSan 3,4,'KOAS','2022-06-12'
+--------------------------------update ThanhLyTaiSan
+create proc update_ThanhLyTaiSan
+(@ma int,@sl int,@nh nvarchar(50),@ntl date)
+as
+begin
+update ThanhLyTaiSan
+set ThanhLyTaiSan.SoLuong = @sl, ThanhLyTaiSan.NhanHieu = @nh, ThanhLyTaiSan.NgayThanhLy = @ntl
+where ThanhLyTaiSan.MaTS = @ma
+end
+
+drop proc update_ThanhLyTaiSan
+
+exec  update_ThanhLyTaiSan 2,4,N'KOAS','2022-06-15'
+--------------------------------delete ThanhLyTaiSan
+create proc delete_ThanhLyTaiSan
+(@ma int)
+as
+begin
+delete from ThanhLyTaiSan
+where ThanhLyTaiSan.MaTS = @ma
+end
+
+drop proc delete_ThanhLyTaiSan
+
+exec  delete_ThanhLyTaiSan 4
+-------------------------------------------------------------------------select ThuHoiTaiSan
+create proc select_ThuHoiTaiSan
+as
+begin
+select *
+from ThuHoiTaiSan
+end
+
+drop proc select_ThuHoiTaiSan
+
+exec  select_ThuHoiTaiSan
+----------------------------------insert ThuHoiTaiSan
+create proc insert_ThuHoiTaiSan
+(@ma int,@sl int,@mapb int,@manv int,@nth date)
+as
+begin
+insert into ThuHoiTaiSan (MaTS,SoLuong,MaPhongBan,MaNV,NgayThuHoi)
+values( @ma,@sl,@mapb,@manv,@nth)
+end
+
+drop proc insert_ThuHoiTaiSan
+
+exec  insert_ThuHoiTaiSan 3,1,7,null,'2022-06-12'
+--------------------------------update ThuHoiTaiSan
+create proc update_ThuHoiTaiSan
+(@ma int,@sl int,@mapb int,@manv int,@nth date)
+as
+begin
+update ThuHoiTaiSan
+set ThuHoiTaiSan.SoLuong = @sl, ThuHoiTaiSan.MaPhongBan = @mapb, ThuHoiTaiSan.MaNV = @manv, ThuHoiTaiSan.NgayThuHoi = @nth
+where ThuHoiTaiSan.MaTS = @ma
+end
+
+drop proc update_ThuHoiTaiSan
+
+exec  update_ThuHoiTaiSan 3,1,8,N'KOAS','2022-06-15'
+--------------------------------delete ThuHoiTaiSan
+create proc delete_ThuHoiTaiSan
+(@ma int)
+as
+begin
+delete from ThuHoiTaiSan
+where ThuHoiTaiSan.MaTS = @ma
+end
+
+drop proc delete_ThuHoiTaiSan
+
+exec  delete_ThuHoiTaiSan 4
+--------------------------------select XuatSuDungTaiSan
+create proc select_XuatSuDungTaiSan
+as
+begin
+select *
+from XuatSuDungTaiSan
+end
+
+drop proc select_XuatSuDungTaiSan
+
+exec  select_XuatSuDungTaiSan
+------------------------------------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-------------------------------------------------------------------Select PQ_TaiKhoan_TK 
+CREATE PROCEDURE select_PQ_TaiKhoan_TK 
+@Id int
+AS
+SELECT c.Id_TK, c.TenTK, c.MatKhau, q.Ten,  n.MoTa
+FROM PQ_TaiKhoan c 
+JOIN PQ_NhomQuyen_TK e ON c.Id_TK = e.Id_TK 
+JOIN PQ_NhomQuyen_CN d ON d.Id_NQ = e.Id_NQ 
+JOIN PQ_ChucNang n  ON d.Id_NQ = e.Id_NQ  
+JOIN PQ_NhomQuyen q  on d.Id_CN = n.Id_CN
+Where e.Id_TK = @Id
+
+drop proc select_PQ_TaiKhoan_TK 
+
+exec select_PQ_TaiKhoan_TK  3
+
+------------------------------------------------------------------------------
+CREATE PROCEDURE select_PQ_TaiKhoan_TK1 
+
+AS
+SELECT *
+FROM PQ_TaiKhoan c 
+JOIN PQ_NhomQuyen_TK e ON c.Id_TK = e.Id_TK 
+
+
+drop proc select_PQ_TaiKhoan_TK1
+
+exec select_PQ_TaiKhoan_TK1
+----------------------------------------------------------select QT_TaiSan 
+CREATE PROCEDURE select_QT_TaiSan 
+@Id int
+AS
+SELECT c.Id_TS, c.MaTS, c.TenTS, e.NgayNhap,  d.Ten as TenNhanHieu, n.PhanLoai
+FROM QT_TaiSan c 
+JOIN QL_PhieuNhap e ON c.Id_PN = e.Id_PN
+JOIN CT_NhanHieu d ON d.Id_NH = c.Id_NH
+JOIN CT_ChiTietLoaiTS n  ON n.Id_Loai = c.Id_Loai
+Where c.Id_TS = @Id
+
+drop proc select_QT_TaiSan
+
+exec select_QT_TaiSan  3
+-------------
+CREATE PROCEDURE select_QT_TaiSan1
+AS
+SELECT Id_TS, MaTS, TenTS, Id_NH, Id_Loai, MoTa, Model
+FROM QT_TaiSan
+
+drop proc select_QT_TaiSan1
+
+exec select_QT_TaiSan1
+---------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--------------------------------select TaiKhoanTK
+create proc select_PQ_TaiKhoan1
+(@maTK int)
+as
+begin
+select *
+from PQ_TaiKhoan
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc select_PQ_TaiKhoan1
+
+exec  select_PQ_TaiKhoan1 2
+----------------------------------insert TaiKhoan
+create proc insert_PQ_TaiKhoan
+(@ten nvarchar(50),@mk nvarchar(50))
+as
+begin
+insert into PQ_TaiKhoan (TenTK, MatKhau)
+values( @ten, @mk)
+end
+
+drop proc insert_PQ_TaiKhoan
+
+exec  insert_PQ_TaiKhoan 'ADMIN3', '123'
+-----------------------------------------
+create proc insert_PQ_NhomQuyen
+(@ten nvarchar(50))
+as
+begin
+insert into PQ_NhomQuyen (Ten)
+values( @ten)
+end
+
+drop proc insert_PQ_NhomQuyen
+
+exec  insert_PQ_NhomQuyen N'Báo Cáo'
+--------------------------------update TaiKhoan
+create proc update_PQ_TaiKhoan
+(@maTK int,@tenTK nvarchar(50),@mk nvarchar(50))
+as
+begin
+update PQ_TaiKhoan
+set PQ_TaiKhoan.TenTK = @tenTK, PQ_TaiKhoan.MatKhau = @mk,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc update_PQ_TaiKhoan
+
+exec  update_PQ_TaiKhoan 2,'ADMIN4','123'
+--------------------------------delete TaiKhoan
+create proc delete_PQ_TaiKhoan
+(@maTK int)
+as
+begin
+delete from PQ_TaiKhoan
+where PQ_TaiKhoan.Id_TK = @maTK
+end
+
+drop proc delete_PQ_TaiKhoan
+
+exec  delete_PQ_TaiKhoan 1
+--------------------------------------------------------------------------select PQ_NhomQuyen
+create proc select_PQ_NhomQuyen
+as
+begin
+select *
+from PQ_NhomQuyen
+end
+
+drop proc select_PQ_NhomQuyen
+
+exec  select_PQ_NhomQuyen
+
+create proc select_PQ_NhomQuyen1
+@ma int
+as
+begin
+select *
+from PQ_NhomQuyen
+where Id_NQ = @ma
+end
+
+drop proc select_PQ_NhomQuyen1
+
+exec  select_PQ_NhomQuyen1 3
+------------------------------------------------------------------------------select_PQ_NhomQuyen_CN
+create proc select_PQ_NhomQuyen_CN
+as
+begin
+select *
+from PQ_NhomQuyen_CN
+end
+
+drop proc select_PQ_NhomQuyen_CN
+
+exec  select_PQ_NhomQuyen_CN 
+-------------------------------------------------------------------Select_PQ_NhomQuyen_CN_HT
+CREATE PROCEDURE Select_PQ_NhomQuyen_CN_HT
+AS
+SELECT c.ID, c.Id_NQ,e.Ten, c.Id_CN,q.MoTa, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM PQ_NhomQuyen_CN c 
+JOIN PQ_NhomQuyen e ON c.Id_NQ = e.Id_NQ 
+JOIN PQ_ChucNang q on c.Id_CN= q.Id_CN
+
+drop proc Select_PQ_NhomQuyen_CN_HT
+
+exec Select_PQ_NhomQuyen_CN_HT
+------------------------------select PQ_NhomQuyen_CN1
+create proc select_PQ_NhomQuyen_CN1
+(@m int)
+as
+begin
+select *
+from PQ_NhomQuyen_CN
+where ID = @m
+end
+
+drop proc select_PQ_NhomQuyen_CN1
+
+exec  select_PQ_NhomQuyen_CN1 3
+----------------------------------insert PQ_NhomQuyen_CN2
+create proc insert_PQ_NhomQuyen_CN2
+(@ten nvarchar(100), @mota nvarchar(100))
+as
+begin
+insert into PQ_NhomQuyen (Ten)
+values( @ten)
+insert into PQ_ChucNang (MoTa)
+values ( @mota)
+insert into PQ_NhomQuyen_CN (Id_CN, Id_NQ)
+values ( IDENT_CURRENT('PQ_ChucNang'),IDENT_CURRENT('PQ_NhomQuyen'))
+end
+
+drop proc insert_PQ_NhomQuyen_CN2
+
+exec  insert_PQ_NhomQuyen_CN2 'ADMIN11','Test11'
+----------------------------------insert PQ_NhomQuyen_CN3
+create proc insert_PQ_NhomQuyen_CN3
+(@ten nvarchar(100),@mota nvarchar(100))
+as
+begin
+declare @a nvarchar(100), @b nvarchar(100), @c int,@d int
+select @c = Id_NQ
+from PQ_NhomQuyen
+where @ten = Ten
+select @d = Id_CN
+from PQ_ChucNang
+where @mota = MoTa
+insert into PQ_NhomQuyen_CN (Id_NQ,Id_CN)
+values( @c, @d)
+end
+
+drop proc insert_PQ_NhomQuyen_CN3
+
+exec  insert_PQ_NhomQuyen_CN3 'ADMIN2','test1'
+----------------------------------insert PQ_NhomQuyen_CN
+create proc insert_PQ_NhomQuyen_CN
+(@ten int, @mota int,@x int,@t int,@s int,@xoa int)
+as
+begin
+insert into PQ_NhomQuyen_CN (Id_CN, Id_NQ,Xem,Them,Sua,Xoa)
+values (@ten,@mota,@x,@t,@s,@xoa )
+end
+
+drop proc insert_PQ_NhomQuyen_CN
+
+exec  insert_PQ_NhomQuyen_CN 3,2,1,1,1,1
+--------------------------------update_PQ_NhomQuyen_CN
+create proc update_PQ_NhomQuyen_CN
+(@ma int,@ten int, @mota int,@x int,@t int,@s int,@xoa int)
+as
+begin
+update PQ_NhomQuyen_CN
+set Id_CN = @ten,Id_NQ=@mota,Xem=@x,Them=@t,Sua=@s,Xoa=@xoa,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_PQ_NhomQuyen_CN
+
+exec  update_PQ_NhomQuyen_CN 5,1,1,1,1,1,1
+--------------------------------update_PQ_NhomQuyen_CN2
+create proc update_PQ_NhomQuyen_CN2
+(@id int,@ten nvarchar(100), @mota nvarchar(100))
+as
+begin
+declare @i int, @a int, @c int
+select @i = ID, @a = Id_NQ, @c = Id_CN
+from PQ_NhomQuyen_CN
+update PQ_NhomQuyen
+set PQ_NhomQuyen.Ten = @ten 
+where @id = @i and PQ_NhomQuyen.Id_NQ = @a
+update PQ_ChucNang
+set PQ_ChucNang.MoTa = @mota
+where @id = @i and PQ_ChucNang.Id_CN = @c
+end
+
+drop proc update_PQ_NhomQuyen_CN2
+
+exec  update_PQ_NhomQuyen_CN2 5,'ADMIN2','Sua2'
+--------------------------------delete_PQ_NhomQuyen_CN
+create proc delete_PQ_NhomQuyen_CN
+(@ma int)
+as
+begin
+delete from PQ_NhomQuyen_CN
+where ID = @ma
+end
+
+drop proc delete_PQ_NhomQuyen_CN
+
+exec  delete_PQ_NhomQuyen_CN 1
+------------------------------------------------------------------------------select_PQ_NhomQuyen_TK
+create proc select_PQ_NhomQuyen_TK
+as
+begin
+select *
+from PQ_NhomQuyen_TK
+end
+
+drop proc select_PQ_NhomQuyen_TK
+
+exec  select_PQ_NhomQuyen_TK
+-------------------------------------------------------------------Select_PQ_NhomQuyen_TK_HT
+CREATE PROCEDURE Select_PQ_NhomQuyen_TK_HT
+AS
+SELECT c.ID, c.Id_TK,q.TenTK, c.Id_NQ,e.Ten, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM PQ_NhomQuyen_TK c 
+JOIN PQ_NhomQuyen e ON c.Id_NQ = e.Id_NQ 
+JOIN PQ_TaiKhoan q on c.Id_TK= q.Id_TK
+
+drop proc Select_PQ_NhomQuyen_TK_HT
+
+exec Select_PQ_NhomQuyen_TK_HT
+------------------------------select PQ_NhomQuyen_TK1
+create proc select_PQ_NhomQuyen_TK1
+(@m int)
+as
+begin
+select *
+from PQ_NhomQuyen_TK
+where ID = @m
+end
+
+drop proc select_PQ_NhomQuyen_TK1
+
+exec  select_PQ_NhomQuyen_TK1 3
+----------------------------------insert PQ_NhomQuyen_TK
+create proc insert_PQ_NhomQuyen_TK
+(@ten int, @mota int)
+as
+begin
+insert into PQ_NhomQuyen_TK (Id_TK, Id_NQ)
+values (@ten,@mota)
+end
+
+drop proc insert_PQ_NhomQuyen_TK
+
+exec  insert_PQ_NhomQuyen_TK 3,2
+--------------------------------update_PQ_NhomQuyen_TK
+create proc update_PQ_NhomQuyen_TK
+(@ma int,@ten int,@mota int)
+as
+begin
+update PQ_NhomQuyen_TK
+set Id_TK = @ten,Id_NQ=@mota,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_PQ_NhomQuyen_TK
+
+exec  update_PQ_NhomQuyen_TK 5,1,1
+--------------------------------delete_PQ_NhomQuyen_TK
+create proc delete_PQ_NhomQuyen_TK
+(@ma int)
+as
+begin
+delete from PQ_NhomQuyen_TK
+where ID = @ma
+end
+
+drop proc delete_PQ_NhomQuyen_TK
+
+exec  delete_PQ_NhomQuyen_TK 1
+
+------------------------------------------update PQ_NhomQuyen
+create proc update_PQ_NhomQuyen
+(@ma int,@nq nvarchar(100))
+as
+begin
+update PQ_NhomQuyen
+set PQ_NhomQuyen.Ten = @nq,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_NQ = @ma
+end
+
+drop proc update_PQ_NhomQuyen
+
+exec  update_PQ_NhomQuyen 2
+--------------------------------delete PQ_NhomQuyen
+create proc delete_PQ_NhomQuyen
+(@nq int)
+as
+begin
+delete from PQ_NhomQuyen
+where PQ_NhomQuyen.Id_NQ = @nq
+end
+
+drop proc delete_PQ_NhomQuyen
+
+exec  delete_PQ_NhomQuyen 2
+-------------------------------------------------------------------------select PQ_ChucNang
+create proc select_PQ_ChucNang
+as
+begin
+select *
+from PQ_ChucNang
+end
+
+drop proc select_PQ_ChucNang
+
+exec  select_PQ_ChucNang
+
+create proc select_PQ_ChucNang1
+@ma int
+as
+begin
+select *
+from PQ_ChucNang
+where Id_CN = @ma
+end
+
+drop proc select_PQ_ChucNang1
+
+exec  select_PQ_ChucNang1 1
+----------------------------------insert PQ_ChucNang
+create proc insert_PQ_ChucNang
+(@sn nvarchar(100))
+as
+begin
+insert into PQ_ChucNang (MoTa)
+values(@sn)
+end
+
+drop proc insert_PQ_ChucNang
+
+exec  insert_PQ_ChucNang 'Test'
+--------------------------------update PQ_ChucNang
+create proc update_PQ_ChucNang
+(@ma int,@ten nvarchar(100))
+as
+begin
+update PQ_ChucNang
+set PQ_ChucNang.MoTa = @ten,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where PQ_ChucNang.Id_CN = @ma
+end
+
+drop proc update_PQ_ChucNang
+
+exec  update_PQ_ChucNang 2,'Test2'
+--------------------------------delete PQ_ChucNang
+create proc delete_PQ_ChucNang
+(@ma int)
+as
+begin
+delete from PQ_ChucNang
+where PQ_ChucNang.Id_CN = @ma
+end
+
+drop proc delete_PQ_ChucNang
+
+exec  delete_PQ_ChucNang 3
+
+
+-------------------------------------------------------------------Select PQ_TaiKhoan_TK 
+CREATE PROCEDURE select_PQ_TaiKhoan_TK 
+@Id int
+AS
+SELECT c.Id_TK, c.TenTK, c.MatKhau, q.Ten as N'Nhóm quyền'
+FROM PQ_TaiKhoan c 
+JOIN PQ_NhomQuyen_TK e ON c.Id_TK = e.Id_TK 
+JOIN PQ_NhomQuyen q  on e.Id_NQ= q.Id_NQ
+Where e.Id_TK = @Id
+
+drop proc select_PQ_TaiKhoan_TK 
+
+exec select_PQ_TaiKhoan_TK  3
+-------------------------------------------------------------------Select PQ_TaiKhoan_HT
+CREATE PROCEDURE select_PQ_TaiKhoan_TK_HT
+AS
+SELECT c.Id_TK, c.TenTK, c.MatKhau, q.Ten, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM PQ_TaiKhoan c 
+JOIN PQ_NhomQuyen_TK e ON c.Id_TK = e.Id_TK 
+JOIN PQ_NhomQuyen q  on e.Id_NQ= q.Id_NQ
+
+drop proc select_PQ_TaiKhoan_TK_HT
+
+exec select_PQ_TaiKhoan_TK_HT
+
+------------------------------------------------------------------------------
+CREATE PROCEDURE select_PQ_TaiKhoan_TK1 
+
+AS
+SELECT *
+FROM PQ_TaiKhoan c 
+JOIN PQ_NhomQuyen_TK e ON c.Id_TK = e.Id_TK 
+
+
+drop proc select_PQ_TaiKhoan_TK1
+
+exec select_PQ_TaiKhoan_TK1
+
+-----------------------------------------------------------------------------------select_QT_TaiSan
+CREATE PROCEDURE select_QT_TaiSan
+AS
+SELECT Id_TS, MaTS, TenTS, Id_NH, Id_Loai, MoTa, Model
+FROM QT_TaiSan
+
+drop proc select_QT_TaiSan
+
+exec select_QT_TaiSan
+
+CREATE PROCEDURE select_QT_TaiSan1
+(@ma int)
+AS
+SELECT Id_TS, MaTS,Id_PN, TenTS, Id_NH, Id_Loai, MoTa, Model
+FROM QT_TaiSan
+where Id_TS = @ma
+
+drop proc select_QT_TaiSan1
+
+exec select_QT_TaiSan1 3
+-------------------------------------------------------------------Select_QT_TaiSan_HT
+CREATE PROCEDURE Select_QT_TaiSan_HT
+AS
+SELECT t.Id_TS, t.MaTS,t.Id_PN, n.SoPhieuNhap, t.TenTS,t.Id_NH ,h.Ten,t.Id_Loai, l.PhanLoai, t.MoTa, t.Model, t.NgayKhoiTao,t.TKKhoiTao,t.NgayChinhSuaGanNhat,t.TKChinhSua,t.MucDaXoa
+FROM QT_TaiSan t 
+JOIN QL_PhieuNhap n ON t.Id_PN = n.Id_PN
+JOIN CT_NhanHieu h  on h.Id_NH = t.Id_NH
+JOIN CT_ChiTietLoaiTS l  on l.Id_Loai = t.Id_Loai 
+
+drop proc Select_QT_TaiSan_HT
+
+exec Select_QT_TaiSan_HT
+-------------------------------------------select QT_TaiSan 
+CREATE PROCEDURE select_QT_TaiSan1
+@Id int
+AS
+SELECT c.Id_TS, c.MaTS, c.TenTS, e.NgayNhap,  d.Ten as TenNhanHieu, n.PhanLoai
+FROM QT_TaiSan c 
+JOIN QL_PhieuNhap e ON c.Id_PN = e.Id_PN
+JOIN CT_NhanHieu d ON d.Id_NH = c.Id_NH
+JOIN CT_ChiTietLoaiTS n  ON n.Id_Loai = c.Id_Loai
+Where c.Id_TS = @Id
+
+drop proc select_QT_TaiSan
+
+exec select_QT_TaiSan1  3
+----------------------------------------insert_QT_TaiSan
+CREATE PROCEDURE insert_QT_TaiSan
+(@ma nvarchar(100),@pn int,@ten nvarchar(100),@nh nvarchar(100),@loai nvarchar(100),@mota nvarchar(100),@model nvarchar(100))
+AS
+declare @a int,@b int
+select @a = Id_NH
+from CT_NhanHieu where @nh = Ten
+select @b = Id_Loai
+from CT_ChiTietLoaiTS where @loai = Ten
+insert into QT_TaiSan(MaTS,Id_PN, TenTS, Id_NH, Id_Loai, MoTa, Model)
+values(@ma,@pn,@ten,@a,@b,@mota,@model)
+
+drop proc insert_QT_TaiSan
+
+exec insert_QT_TaiSan 'Ghe01',1,N'Gh?','Riot',N'Gh?',N'Gh? nhân viên','Null'
+---------------------------------------update_QT_TaiSan
+CREATE PROCEDURE update_QT_TaiSan
+(@m int,@ma nvarchar(100),@pn int,@ten nvarchar(100),@nh nvarchar(100),@loai nvarchar(100),@mota nvarchar(100),@model nvarchar(100))
+AS
+declare @a int,@b int
+select @a = Id_NH
+from CT_NhanHieu where @nh = Ten
+select @b = Id_Loai
+from CT_ChiTietLoaiTS where @loai = Ten
+
+update QT_TaiSan
+set MaTS = @ma, Id_PN = @pn, TenTS = @ten, Id_NH = @a, Id_Loai=@b, MoTa = @mota,Model = @model,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_TS = @m
+
+drop proc update_QT_TaiSan
+
+exec update_QT_TaiSan 1,'Ghe01',1,N'Ghế','Riot',N'Ghế',N'Ghế nhân viên','12062000'
+----------------------------delete_QT_TaiSan
+CREATE PROCEDURE delete_QT_TaiSan
+(@ma int)
+AS
+delete 
+FROM QT_TaiSan
+where Id_TS = @ma
+
+drop proc delete_QT_TaiSan
+
+exec delete_QT_TaiSan 3
+
+-------------------------------------------------------------------------select_QT_PhongBan
+CREATE PROCEDURE select_QT_PhongBan
+AS
+SELECT TenPhongBan, NgayKhoiTao
+FROM QT_PhongBan
+
+drop proc select_QT_PhongBan
+
+exec select_QT_PhongBan
+
+CREATE PROCEDURE select_QT_PhongBan1
+(@ma int)
+AS
+SELECT Id_PB, TenPhongBan, NgayKhoiTao
+FROM QT_PhongBan
+where Id_PB = @ma
+
+drop proc select_QT_PhongBan1
+
+exec select_QT_PhongBan1 1
+-------------------------------------insert_QT_PhongBan
+CREATE PROCEDURE insert_QT_PhongBan
+(@ten nvarchar(100))
+AS
+insert into QT_PhongBan(TenPhongBan)
+values(@ten)
+
+drop proc insert_QT_TaiSan
+
+exec insert_QT_PhongBan N'Phòng Kế toán'
+exec insert_QT_PhongBan N'Phòng hành chính và nhân sự'
+--------------------------------update_QT_PhongBan
+CREATE PROCEDURE update_QT_PhongBan
+(@m int,@ten nvarchar(100))
+AS
+update QT_PhongBan
+set TenPhongBan = @ten,NgayChinhSua=getdate(),TKChinhSua=current_user
+where Id_PB = @m
+
+drop proc update_QT_PhongBan
+
+exec update_QT_PhongBan 1, N'Ban lãnh đạo'
+----------------------------delete_QT_PhongBan
+CREATE PROCEDURE delete_QT_PhongBan
+(@ma int)
+AS
+delete 
+FROM QT_PhongBan
+where Id_PB = @ma
+
+drop proc delete_QT_PhongBan
+
+exec delete_QT_PhongBan 6
+-------------------------------------------------------------------------select_CT_Kho
+CREATE PROCEDURE select_CT_Kho
+AS
+SELECT Id_Kho,MoTa
+FROM CT_Kho
+
+drop proc select_CT_Kho
+
+exec select_CT_Kho
+
+CREATE PROCEDURE select_CT_Kho1
+(@ma int)
+AS
+SELECT Id_Kho, MoTa
+FROM CT_Kho
+where Id_Kho = @ma
+
+drop proc select_CT_Kho1
+
+exec select_CT_Kho1 1
+-------------------------------------insert_CT_Kho
+CREATE PROCEDURE insert_CT_Kho
+(@ten nvarchar(100))
+AS
+insert into CT_Kho(MoTa)
+values(@ten)
+
+drop proc insert_QT_TaiSan
+
+exec insert_CT_Kho N'Kho tổng của công ty'
+exec insert_CT_Kho N'Phòng hành chính và nhân sự'
+--------------------------------update_CT_Kho
+CREATE PROCEDURE update_CT_Kho
+(@m int,@ten nvarchar(100))
+AS
+update CT_Kho
+set MoTa = @ten,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_Kho = @m
+
+drop proc update_CT_Kho
+
+exec update_CT_Kho 1, N'Tổng kho của công ty'
+----------------------------delete_CT_Kho
+CREATE PROCEDURE delete_CT_Kho
+(@ma int)
+AS
+delete 
+FROM CT_Kho
+where Id_Kho = @ma
+
+drop proc delete_CT_Kho
+
+exec delete_CT_Kho 6
+------------------------------------------------------------------------------select_CT_ChiTietLoaiTS
+create proc select_CT_ChiTietLoaiTS
+as
+begin
+select Id_Loai,NhomLoai,Ten,PhanLoai,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from CT_ChiTietLoaiTS
+end
+
+drop proc select_CT_ChiTietLoaiTS
+
+exec  select_CT_ChiTietLoaiTS
+------------------------------select CT_ChiTietLoaiTS1
+create proc select_CT_ChiTietLoaiTS1
+(@m int)
+as
+begin
+select Id_Loai,NhomLoai,Ten,PhanLoai,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from CT_ChiTietLoaiTS
+where Id_Loai = @m
+end
+
+drop proc select_CT_ChiTietLoaiTS1
+
+exec  select_CT_ChiTietLoaiTS1 2
+----------------------------------insert CT_ChiTietLoaiTS
+create proc insert_CT_ChiTietLoaiTS
+(@ma int,@nl int,@ten nvarchar(100),@pl nvarchar(100), @mota nvarchar(100))
+as
+begin
+if(@ma > 0)
+update CT_ChiTietLoaiTS
+set NhomLoai =  @nl,Ten = @ten,PhanLoai=@pl,MoTa=@mota,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_Loai = @ma 
+else
+insert into CT_ChiTietLoaiTS (NhomLoai,Ten, PhanLoai,MoTa)
+values (@nl,@ten,@pl,@mota)
+end
+
+drop proc insert_CT_ChiTietLoaiTS
+
+exec  insert_CT_ChiTietLoaiTS 3,1,N'Máy chiếu',N'Đồ điện tử',N'Dùng để chiếu'
+--------------------------------update_CT_ChiTietLoaiTS
+create proc update_CT_ChiTietLoaiTS
+(@ma int,@ten nvarchar(100),@pl nvarchar(100), @mota nvarchar(100))
+as
+begin
+update CT_ChiTietLoaiTS
+set Ten = @ten,PhanLoai=@pl,MoTa=@mota,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_Loai = @ma 
+end
+
+drop proc update_CT_ChiTietLoaiTS
+
+exec  update_CT_ChiTietLoaiTS 5,1,1
+--------------------------------delete_CT_ChiTietLoaiTS
+create proc delete_CT_ChiTietLoaiTS
+(@ma int)
+as
+begin
+delete from CT_ChiTietLoaiTS
+where Id_Loai = @ma
+end
+
+drop proc delete_CT_ChiTietLoaiTS
+
+exec  delete_PQ_NhomQuyen_TK 1
+-------------------------------------------------------------------------select_CT_NhanHieu
+CREATE PROCEDURE select_CT_NhanHieu
+AS
+SELECT Id_NH,Ten
+FROM CT_NhanHieu
+
+drop proc select_CT_NhanHieu
+
+exec select_CT_NhanHieu
+
+CREATE PROCEDURE select_CT_NhanHieu1
+(@ma int)
+AS
+SELECT Id_NH,Ten
+FROM CT_NhanHieu
+where Id_NH = @ma
+
+drop proc select_CT_NhanHieu1
+
+exec select_CT_NhanHieu1 1
+-------------------------------------insert_CT_NhanHieu
+CREATE PROCEDURE insert_CT_NhanHieu
+(@ten nvarchar(100))
+AS
+insert into CT_NhanHieu(Ten)
+values(@ten)
+
+drop proc insert_QT_TaiSan
+
+exec insert_CT_NhanHieu N'KIOS'
+exec insert_CT_NhanHieu N'Thăng Long'
+--------------------------------update_CT_NhanHieu
+CREATE PROCEDURE update_CT_NhanHieu
+(@m int,@ten nvarchar(100))
+AS
+update CT_NhanHieu
+set Ten = @ten,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_NH = @m
+
+drop proc update_CT_NhanHieu
+exec update_CT_NhanHieu 3, N'Long Bình'
+----------------------------delete_CT_NhanHieu
+CREATE PROCEDURE delete_CT_NhanHieu
+(@ma int)
+AS
+delete 
+FROM CT_NhanHieu
+where Id_NH = @ma
+
+drop proc delete_CT_NhanHieu
+
+exec delete_CT_Kho 6
+------------------------------------------------------------------------------select_QL_PhieuNhap
+create proc select_QL_PhieuNhap
+as
+begin
+select *
+from QL_PhieuNhap
+end
+
+drop proc select_QL_PhieuNhap
+
+exec  select_QL_PhieuNhap
+------------------------------select QL_PhieuNhap
+create proc select_QL_PhieuNhap1
+(@m int)
+as
+begin
+select *
+from QL_PhieuNhap
+where Id_PN = @m
+end
+
+drop proc select_QL_PhieuNhap1
+
+exec  select_QL_PhieuNhap1 2
+-------------------------------------------------------------------Select_QL_PhieuNhap_HT
+CREATE PROCEDURE Select_QL_PhieuNhap_HT
+AS
+SELECT t.Id_PN, t.SoPhieuNhap,t.NgayNhap, t.Id_NV, n.TenNV, t.Id_TK,h.TenTK ,t.Id_Kho,l.MoTa, t.DienGiai, t.NgayKhoiTao,t.TKKhoiTao,t.NgayChinhSuaGanNhat,t.TKChinhSua,t.MucDaXoa
+FROM QL_PhieuNhap t 
+JOIN QT_NhanVien n ON t.Id_NV = n.Id_NV
+JOIN PQ_TaiKhoan h  on h.Id_TK = t.Id_TK
+JOIN CT_Kho l  on l.Id_Kho = t.Id_Kho
+
+drop proc Select_QL_PhieuNhap_HT
+
+exec Select_QL_PhieuNhap_HT
+----------------------------------insert QL_PhieuNhap
+create proc insert_QL_PhieuNhap
+(@spn nvarchar(100),@nn nvarchar(100),@nv int,@tk int,@kho int, @dg nvarchar(100))
+as
+begin
+insert into QL_PhieuNhap (SoPhieuNhap,NgayNhap,Id_NV,Id_TK,Id_Kho,DienGiai)
+values (@spn,@nn,@nv,@tk,@kho, @dg)
+end
+
+drop proc insert_QL_PhieuNhap
+
+exec  insert_QL_PhieuNhap 'Bàn',N'Nội thất','Bàn phòng họp'
+--------------------------------update_QL_PhieuNhap
+create proc update_QL_PhieuNhap
+(@ma int,@spn nvarchar(100),@nn nvarchar(100),@nv int,@tk int,@kho int, @dg nvarchar(100))
+as
+begin
+update QL_PhieuNhap
+set SoPhieuNhap = @spn,NgayNhap=@nn,Id_NV=@nv,Id_TK=@tk,Id_Kho=@kho,DienGiai=@dg,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_PN = @ma 
+end
+
+drop proc update_QL_PhieuNhap
+
+exec  update_QL_PhieuNhap 5,1,1
+--------------------------------delete_QL_PhieuNhap
+create proc delete_QL_PhieuNhap
+(@ma int)
+as
+begin
+delete from QL_PhieuNhap
+where Id_PN = @ma
+end
+
+drop proc delete_QL_PhieuNhap
+
+exec  delete_QL_PhieuNhap 1
+------------------------------------------------------------------------------select_QL_PhieuNhap_ChiTiet
+create proc select_QL_PhieuNhap_ChiTiet
+as
+begin
+select *
+from QL_PhieuNhap_ChiTiet
+end
+
+drop proc select_QL_PhieuNhap_ChiTiet
+
+exec  select_QL_PhieuNhap_ChiTiet
+------------------------------select QL_PhieuNhap_ChiTiet
+create proc select_QL_PhieuNhap_ChiTiet1
+(@m int)
+as
+begin
+select *
+from QL_PhieuNhap_ChiTiet
+where ID = @m
+end
+
+drop proc select_QL_PhieuNhap_ChiTiet1
+
+exec  select_QL_PhieuNhap_ChiTiet1 2
+----------------------------------insert QL_PhieuNhap_ChiTiet
+create proc insert_QL_PhieuNhap_ChiTiet
+(@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+insert into QL_PhieuNhap_ChiTiet (Id_PN,Id_TS,TenTS)
+values (@pn,@ts,@tts)
+end
+
+drop proc insert_QL_PhieuNhap_ChiTiet
+
+exec  insert_QL_PhieuNhap_ChiTiet 1,1,'Bàn họp'
+--------------------------------update_QL_PhieuNhap_ChiTiet
+create proc update_QL_PhieuNhap_ChiTiet
+(@ma int,@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+update QL_PhieuNhap_ChiTiet
+set Id_PN = @pn,Id_TS=@ts,TenTS=@tts,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_QL_PhieuNhap_ChiTiet
+
+exec  update_QL_PhieuNhap_ChiTiet 1,1,1,'Ghế'
+--------------------------------delete_QL_PhieuNhap_ChiTiet
+create proc delete_QL_PhieuNhap_ChiTiet
+(@ma int)
+as
+begin
+delete from QL_PhieuNhap_ChiTiet
+where ID = @ma
+end
+
+drop proc delete_QL_PhieuNhap_ChiTiet
+
+exec  delete_QL_PhieuNhap_ChiTiet 1
+------------------------------------------------------------------------------select_QL_PhieuThanhLy
+create proc select_QL_PhieuThanhLy
+as
+begin
+select *
+from QL_PhieuThanhLy
+end
+
+drop proc select_QL_PhieuThanhLy
+
+exec  select_QL_PhieuThanhLy
+------------------------------------------------------------------------------select_QL_PhieuThanhLy_ChiTiet_HT
+CREATE PROCEDURE Select_QL_PhieuThanhLy_ChiTiet_HT
+AS
+SELECT c.ID, c.Id_PTL ,e.SoPhieuThanhLy,c.Id_TS,q.TenTS, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM QL_PhieuThanhLy_ChiTiet c 
+JOIN QL_PhieuThanhLy e ON c.Id_PTL = e.Id_PTL
+JOIN QT_TaiSan q on c.Id_TS= q.Id_TS
+
+drop proc Select_QL_PhieuThanhLy_ChiTiet_HT
+
+exec Select_QL_PhieuThanhLy_ChiTiet_HT
+------------------------------select QL_PhieuThanhLy
+create proc select_QL_PhieuThanhLy1
+(@m int)
+as
+begin
+select *
+from QL_PhieuThanhLy
+where Id_PTL = @m
+end
+
+drop proc select_QL_PhieuThanhLy1
+
+exec  select_QL_PhieuThanhLy1 1
+-------------------------------------------------------------------Select_QL_PhieuThanhLy_HT
+CREATE PROCEDURE Select_QL_PhieuThanhLy_HT
+AS
+SELECT t.Id_PTL, t.SoPhieuThanhLy,t.NgayThanhLy, t.Id_NV, n.TenNV ,t.Id_Kho,l.MoTa, t.DienGiai, t.NgayKhoiTao,t.TKKhoiTao,t.NgayChinhSuaGanNhat,t.TKChinhSua,t.MucDaXoa
+FROM QL_PhieuThanhLy t 
+JOIN QT_NhanVien n ON t.Id_NV = n.Id_NV
+JOIN CT_Kho l  on l.Id_Kho = t.Id_Kho
+
+drop proc Select_QL_PhieuThanhLy_HT
+
+exec Select_QL_PhieuThanhLy_HT
+----------------------------------insert QL_PhieuThanhLy
+create proc insert_QL_PhieuThanhLy
+(@sptl nvarchar(100),@ntl nvarchar(100),@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+insert into QL_PhieuThanhLy (SoPhieuThanhLy,NgayThanhLy,Id_NV,Id_Kho,DienGiai)
+values (@sptl,@ntl,@nv,@kho, @dg)
+end
+
+drop proc insert_QL_PhieuThanhLy
+
+exec  insert_QL_PhieuThanhLy '24072000','2022-06-17 16:53:53.700',1,1,N'Thanh lý LapTop cũ'
+--------------------------------update_QL_PhieuThanhLy
+create proc update_QL_PhieuThanhLy
+(@ma int,@sptl nvarchar(100),@ntl nvarchar(100),@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+update QL_PhieuThanhLy
+set SoPhieuThanhLy = @sptl,NgayThanhLy=@ntl,Id_NV=@nv,Id_Kho=@kho,DienGiai=@dg,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_PTL = @ma 
+end
+
+drop proc update_QL_PhieuThanhLy
+
+exec  update_QL_PhieuThanhLy 1,1,1
+--------------------------------delete_QL_PhieuThanhLy
+create proc delete_QL_PhieuThanhLy
+(@ma int)
+as
+begin
+delete from QL_PhieuThanhLy
+where Id_PTL = @ma
+end
+
+drop proc delete_QL_PhieuThanhLy
+
+exec  delete_QL_PhieuThanhLy 1
+------------------------------------------------------------------------------select_QL_PhieuThanhLy_ChiTiet
+create proc select_QL_PhieuThanhLy_ChiTiet
+as
+begin
+select *
+from QL_PhieuThanhLy_ChiTiet
+end
+
+drop proc select_QL_PhieuThanhLy_ChiTiet
+
+exec  select_QL_PhieuThanhLy_ChiTiet
+------------------------------select QL_PhieuThanhLy_ChiTiet
+create proc select_QL_PhieuThanhLy_ChiTiet1
+(@m int)
+as
+begin
+select *
+from QL_PhieuThanhLy_ChiTiet
+where ID = @m
+end
+
+drop proc select_QL_PhieuThanhLy_ChiTiet1
+
+exec  select_QL_PhieuThanhLy_ChiTiet1 2
+----------------------------------insert QL_PhieuThanhLy_ChiTiet
+create proc insert_QL_PhieuThanhLy_ChiTiet
+(@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+insert into QL_PhieuThanhLy_ChiTiet (Id_PTL,Id_TS,TenTS)
+values (@pn,@ts,@tts)
+end
+
+drop proc insert_QL_PhieuThanhLy_ChiTiet
+
+exec  insert_QL_PhieuThanhLy_ChiTiet 1,1,'Bàn họp'
+--------------------------------update_QL_PhieuThanhLy_ChiTiet
+create proc update_QL_PhieuThanhLy_ChiTiet
+(@ma int,@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+update QL_PhieuThanhLy_ChiTiet
+set Id_PTL = @pn,Id_TS=@ts,TenTS=@tts,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_QL_PhieuThanhLy_ChiTiet
+
+exec  update_QL_PhieuThanhLy_ChiTiet 1,1,1,'Ghế'
+--------------------------------delete_QL_PhieuThanhLy_ChiTiet
+create proc delete_QL_PhieuThanhLy_ChiTiet
+(@ma int)
+as
+begin
+delete from QL_PhieuThanhLy_ChiTiet
+where ID = @ma
+end
+
+drop proc delete_QL_PhieuThanhLy_ChiTiet
+
+exec  delete_QL_PhieuNhap_ChiTiet 1
+------------------------------------------------------------------------------select_QL_PhieuThuHoi
+create proc select_QL_PhieuThuHoi
+as
+begin
+select *
+from QL_PhieuThuHoi
+end
+
+drop proc select_QL_PhieuThuHoi
+
+exec  select_QL_PhieuThuHoi
+------------------------------select QL_PhieuThuHoi
+create proc select_QL_PhieuThuHoi1
+(@m int)
+as
+begin
+select *
+from QL_PhieuThuHoi
+where Id_PTH = @m
+end
+
+drop proc select_QL_PhieuThuHoi1
+
+exec  select_QL_PhieuThuHoi1 1
+-------------------------------------------------------------------Select_QL_PhieuThuHoi_HT
+CREATE PROCEDURE Select_QL_PhieuThuHoi_HT
+AS
+SELECT t.Id_PTH, t.SoPhieuTH,t.NgayThuHoi, t.Id_NV, n.TenNV ,t.Id_Kho,l.MoTa, t.DienGiai, t.NgayKhoiTao,t.TKKhoiTao,t.NgayChinhSuaGanNhat,t.TKChinhSua,t.MucDaXoa
+FROM QL_PhieuThuHoi t 
+JOIN QT_NhanVien n ON t.Id_NV = n.Id_NV
+JOIN CT_Kho l  on l.Id_Kho = t.Id_Kho
+
+drop proc Select_QL_PhieuThuHoi_HT
+
+exec Select_QL_PhieuThuHoi_HT
+----------------------------------insert QL_PhieuThuHoi
+create proc insert_QL_PhieuThuHoi
+(@spth nvarchar(100),@nth nvarchar(100),@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+insert into QL_PhieuThuHoi (SoPhieuTH,NgayThuHoi,Id_NV,Id_Kho,DienGiai)
+values (@spth,@nth,@nv,@kho, @dg)
+end
+
+drop proc insert_QL_PhieuThuHoi
+
+exec  insert_QL_PhieuThuHoi '24072000','2022-06-17 16:53:53.700',1,1,N'Thu hồi bàn cũ LapTop cũ'
+--------------------------------update_QL_PhieuThuHoi
+create proc update_QL_PhieuThuHoi
+(@ma int,@spth nvarchar(100),@nth nvarchar(100),@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+update QL_PhieuThuHoi
+set SoPhieuTH = @spth,NgayThuHoi=@nth,Id_NV=@nv,Id_Kho=@kho,DienGiai=@dg,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_PTH = @ma 
+end
+
+drop proc update_QL_PhieuThuHoi
+
+exec  update_QL_PhieuThuHoi 1,'24072000','2022-06-17 16:53:53.700',1,1,N'Thu hồi bàn cũ'
+--------------------------------delete_QL_PhieuThuHoi
+create proc delete_QL_PhieuThuHoi
+(@ma int)
+as
+begin
+delete from QL_PhieuThuHoi
+where Id_PTH = @ma
+end
+
+drop proc delete_QL_PhieuThuHoi
+
+exec  delete_QL_PhieuThuHoi 1
+------------------------------------------------------------------------------select_QL_PhieuThuHoi_ChiTiet
+create proc select_QL_PhieuThuHoi_ChiTiet
+as
+begin
+select *
+from QL_PhieuThuHoi_ChiTiet
+end
+
+drop proc select_QL_PhieuThuHoi_ChiTiet
+
+exec  select_QL_PhieuThuHoi_ChiTiet
+------------------------------------------------------------------------------Select_QL_PhieuThuHoi_ChiTiet_HT
+CREATE PROCEDURE Select_QL_PhieuThuHoi_ChiTiet_HT
+AS
+SELECT c.ID, c.Id_PTH ,e.SoPhieuTH,c.Id_TS,q.TenTS, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM QL_PhieuThuHoi_ChiTiet c 
+JOIN QL_PhieuThuHoi e ON c.Id_PTH = e.Id_PTH
+JOIN QT_TaiSan q on c.Id_TS= q.Id_TS
+
+drop proc Select_QL_PhieuThuHoi_ChiTiet_HT
+
+exec Select_QL_PhieuThuHoi_ChiTiet_HT
+------------------------------select QL_PhieuThuHoi_ChiTiet
+create proc select_QL_PhieuThuHoi_ChiTiet1
+(@m int)
+as
+begin
+select *
+from QL_PhieuThuHoi_ChiTiet
+where ID = @m
+end
+
+drop proc select_QL_PhieuThuHoi_ChiTiet1
+
+exec  select_QL_PhieuThuHoi_ChiTiet1 2
+----------------------------------insert QL_PhieuThuHoi_ChiTiet
+create proc insert_QL_PhieuThuHoi_ChiTiet
+(@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+insert into QL_PhieuThuHoi_ChiTiet (Id_PTH,Id_TS,TenTS)
+values (@pn,@ts,@tts)
+end
+
+drop proc insert_QL_PhieuThuHoi_ChiTiet
+
+exec  insert_QL_PhieuThuHoi_ChiTiet 1,1,'Bàn gỗ hỏng'
+--------------------------------update_QL_PhieuThuHoi_ChiTiet
+create proc update_QL_PhieuThuHoi_ChiTiet
+(@ma int,@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+update QL_PhieuThuHoi_ChiTiet
+set Id_PTH = @pn,Id_TS=@ts,TenTS=@tts,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_QL_PhieuThuHoi_ChiTiet
+
+exec  update_QL_PhieuThuHoi_ChiTiet 1,1,1,'Ghế gãy'
+--------------------------------delete_QL_PhieuThuHoi_ChiTiet
+create proc delete_QL_PhieuThuHoi_ChiTiet
+(@ma int)
+as
+begin
+delete from QL_PhieuThuHoi_ChiTiet
+where ID = @ma
+end
+
+drop proc delete_QL_PhieuThuHoi_ChiTiet
+
+exec  delete_QL_PhieuThuHoi_ChiTiet 1
+------------------------------------------------------------------------------select_QL_PhieuXuat
+create proc select_QL_PhieuXuat
+as
+begin
+select Id_PX,SoPhieuXuat,NgayXuat,ViTriSuDung,Id_PB,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QL_PhieuXuat
+end
+
+drop proc select_QL_PhieuXuat
+
+exec  select_QL_PhieuXuat
+------------------------------select QL_PhieuXuat
+create proc select_QL_PhieuXuat1
+(@m int)
+as
+begin
+select Id_PX,SoPhieuXuat,NgayXuat,ViTriSuDung,Id_PB,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QL_PhieuXuat
+where Id_PX = @m
+end
+
+drop proc select_QL_PhieuXuat1
+
+exec  select_QL_PhieuXuat1 1
+-------------------------------------------------------------------Select_QL_PhieuXuat_HT
+alter PROCEDURE Select_QL_PhieuXuat_HT
+AS
+--declare @b nvarchar(20)
+--select @b = N'Nhân viên' from QL_PhieuXuat where QL_PhieuXuat.ViTriSuDung = 1
+--select @b = N'Phòng ban' from QL_PhieuXuat where QL_PhieuXuat.ViTriSuDung = 0
+SELECT t.Id_PX, 
+t.SoPhieuXuat,
+t.NgayXuat, 
+--@b as ViTriSuDung,
+Case when t.ViTriSuDung = 1 then N'Nhân viên' else N'Phòng ban'end as ViTriSuDung,
+t.Id_PB,
+p.TenPhongBan, 
+t.Id_NV,
+n.TenNV ,
+t.Id_Kho,
+l.MoTa,
+t.DienGiai, 
+t.NgayKhoiTao,
+t.TKKhoiTao,
+t.NgayChinhSuaGanNhat,
+t.TKChinhSua
+,t.MucDaXoa
+FROM QL_PhieuXuat t 
+JOIN CT_Kho l  on l.Id_Kho = t.Id_Kho
+JOIN QT_PhongBan p ON p.Id_PB = t.Id_PB
+JOIN QT_NhanVien n ON t.Id_NV = n.Id_NV
+
+
+drop proc Select_QL_PhieuXuat_HT
+
+exec Select_QL_PhieuXuat_HT
+----------------------------------insert QL_PhieuXuat
+create proc insert_QL_PhieuXuat
+(@sptx nvarchar(100),@nx nvarchar(100),@vt bit,@pb int,@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+insert into QL_PhieuXuat (SoPhieuXuat,NgayXuat,ViTriSuDung,Id_PB,Id_NV,Id_Kho,DienGiai)
+values (@sptx,@nx,@vt,@pb,@nv,@kho, @dg)
+end
+
+drop proc insert_QL_PhieuXuat
+
+exec  insert_QL_PhieuXuat '24072000','2022-06-17 16:53:53.700',1,1,null,1,N'Bàn họp tại phòng họp'
+--------------------------------update_QL_PhieuXuat
+create proc update_QL_PhieuXuat
+(@ma int,@sptx nvarchar(100),@nx nvarchar(100),@vt bit,@pb int,@nv int,@kho int, @dg nvarchar(100))
+as
+begin
+update QL_PhieuXuat
+set SoPhieuXuat = @sptx,NgayXuat=@nx,ViTriSuDung=@vt,Id_PB=@pb,Id_NV=@nv,Id_Kho=@kho,DienGiai=@dg,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_PX = @ma 
+end
+
+drop proc update_QL_PhieuXuat
+
+exec  update_QL_PhieuXuat 1,'24072000','2022-06-17 16:53:53.700',1,1,null,1,N'Đặt tại phòng họp'
+--------------------------------delete_QL_PhieuXuat
+create proc delete_QL_PhieuXuat
+(@ma int)
+as
+begin
+delete from QL_PhieuXuat
+where Id_PX = @ma
+end
+
+drop proc delete_QL_PhieuXuat
+
+exec  delete_QL_PhieuThuHoi 1
+------------------------------------------------------------------------------select_QL_PhieuXuat_ChiTiet
+create proc select_QL_PhieuXuat_ChiTiet
+as
+begin
+select ID,Id_PX,Id_TS,TenTS,NgayChinhSuaGanNhat,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QL_PhieuXuat_ChiTiet
+end
+
+drop proc select_QL_PhieuXuat_ChiTiet
+
+exec  select_QL_PhieuXuat_ChiTiet
+------------------------------select QL_PhieuXuat_ChiTiet
+create proc select_QL_PhieuXuat_ChiTiet1
+(@m int)
+as
+begin
+select ID,Id_PX,Id_TS,TenTS,NgayChinhSuaGanNhat,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QL_PhieuXuat_ChiTiet
+where ID = @m
+end
+
+drop proc select_QL_PhieuXuat_ChiTiet1
+
+exec  select_QL_PhieuXuat_ChiTiet1 2
+------------------------------------------------------------------------------Select_QL_PhieuXuat_ChiTiet_HT
+CREATE PROCEDURE Select_QL_PhieuXuat_ChiTiet_HT
+AS
+SELECT c.ID, c.Id_PX ,e.SoPhieuXuat,c.Id_TS,q.TenTS, c.NgayKhoiTao,c.TKKhoiTao,c.NgayChinhSuaGanNhat,c.TKChinhSua,c.MucDaXoa
+FROM QL_PhieuXuat_ChiTiet c 
+JOIN QL_PhieuXuat e ON c.Id_PX = e.Id_PX
+JOIN QT_TaiSan q on c.Id_TS= q.Id_TS
+
+drop proc Select_QL_PhieuXuat_ChiTiet_HT
+
+exec Select_QL_PhieuXuat_ChiTiet_HT
+----------------------------------insert QL_PhieuXuat_ChiTiet
+create proc insert_QL_PhieuXuat_ChiTiet
+(@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+insert into QL_PhieuXuat_ChiTiet (Id_PX,Id_TS,TenTS)
+values (@pn,@ts,@tts)
+end
+
+drop proc insert_QL_PhieuXuat_ChiTiet
+
+exec  insert_QL_PhieuXuat_ChiTiet 1,1,'Bàn gỗ hỏng'
+--------------------------------update_QL_PhieuXuat_ChiTiet
+create proc update_QL_PhieuXuat_ChiTiet
+(@ma int,@pn int,@ts int,@tts nvarchar(100))
+as
+begin
+update QL_PhieuXuat_ChiTiet
+set Id_PX = @pn,Id_TS=@ts,TenTS=@tts,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where ID = @ma 
+end
+
+drop proc update_QL_PhieuXuat_ChiTiet
+
+exec  update_QL_PhieuXuat_ChiTiet 1,1,1,'Ghế gãy'
+--------------------------------delete_QL_PhieuXuat_ChiTiet
+create proc delete_QL_PhieuXuat_ChiTiet
+(@ma int)
+as
+begin
+delete from QL_PhieuXuat_ChiTiet
+where ID = @ma
+end
+
+drop proc delete_QL_PhieuXuat_ChiTiet
+
+exec  delete_QL_PhieuXuat_ChiTiet 1
+-------------------------------------------------------------------------select NhanVien
+create proc select_NhanVien
+as
+begin
+select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu
+from QT_NhanVien
+end
+
+drop proc select_NhanVien
+
+exec  select_NhanVien
+----------------------------------insert NhanVien
+create proc insert_NhanVien
+(@mapb int,@ten nvarchar(50),@ns date,@sdt nvarchar(20),@mail nvarchar(50),@cv nvarchar(50))
+as
+begin
+insert into NhanVien (MaPhongBan,TenNV,NgaySinh,SDT,Mail,ChucVu)
+values( @mapb,@ten,@ns,@sdt,@mail, @cv)
+end
+
+drop proc insert_NhanVien
+
+exec  insert_NhanVien 7,N'Đoàn Văn Duy','2000-08-09','0856147963','duydv@gmail.com','Quán lý nhân sự'
+--------------------------------update NhanVien
+create proc update_NhanVien
+(@ma int,@mapb int,@ten nvarchar(50),@ns date,@sdt nvarchar(20),@mail nvarchar(50),@cv nvarchar(50))
+as
+begin
+update NhanVien
+set NhanVien.MaPhongBan = @mapb, NhanVien.TenNV = @ten, NhanVien.NgaySinh = @ns, NhanVien.SDT = @sdt, NhanVien.Mail = @mail,NhanVien.ChucVu = @cv
+where NhanVien.MaNV = @ma
+end
+
+drop proc update_NhanVien
+
+exec  update_NhanVien 4,6,N'Trần Thị Huyền','2000-06-12','0868326342','huyendethuong@gmail.com',N'Thư ký phó tổng giám đốc'
+--------------------------------delete NhanVien
+create proc delete_NhanVien
+(@ma int)
+as
+begin
+delete from NhanVien
+where NhanVien.MaNV = @ma
+end
+
+drop proc delete_NhanVien
+
+exec  delete_NhanVien 1
+------------------------------------------------------------------------------select_QT_NhanVien
+create proc select_QT_NhanVien
+as
+begin
+select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QT_NhanVien
+end
+
+drop proc select_QT_NhanVien
+
+exec  select_QT_NhanVien
+-------------------------------------------------------------------Select_QT_NhanVien_HT
+CREATE PROCEDURE Select_QT_NhanVien_HT
+AS
+SELECT n.Id_NV, n.Id_PB ,p.TenPhongBan, n.TenNV, n.NgaySinh ,n.SDT ,n.Mail,n.ChucVu, n.NgayKhoiTao,n.TKKhoiTao,n.NgayChinhSuaGanNhat,n.TKChinhSua,n.MucDaXoa
+FROM QT_NhanVien n
+JOIN QT_PhongBan p ON p.Id_PB = n.Id_PB
+
+
+drop proc Select_QT_NhanVien_HT
+
+exec Select_QT_NhanVien_HT
+------------------------------select QT_NhanVien1
+create proc select_QT_NhanVien1
+(@m int)
+as
+begin
+select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QT_NhanVien
+where Id_NV = @m
+end
+
+drop proc select_QT_NhanVien1
+
+exec  select_QT_NhanVien1 2
+----------------------------------insert QT_NhanVien
+create proc insert_QT_NhanVien
+(@ma int,@pb int,@ten nvarchar(100),@ns nvarchar(100),@sdt nvarchar(20),@mail nvarchar(100), @cv nvarchar(100))
+as
+begin
+if(@ma > 0)
+update QT_NhanVien
+set Id_PB = @pb,TenNV = @ten,NgaySinh = @ns,SDT=@sdt,Mail=@mail,ChucVu=@cv,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_NV = @ma 
+else
+insert into QT_NhanVien (Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu)
+values (@pb,@ten,@ns,@sdt,@mail,@cv)
+end
+
+drop proc insert_QT_NhanVien
+
+exec  insert_QT_NhanVien 3,1,N'Máy chiếu',N'Đồ điện tử',N'Dùng để chiếu'
+--------------------------------delete_QT_NhanVien
+create proc delete_QT_NhanVien
+(@ma int)
+as
+begin
+delete from QT_NhanVien
+where Id_NV = @ma
+end
+
+drop proc delete_QT_NhanVien
+
+exec  delete_QT_NhanVien 1
+--------------------------------delete_QT_NhanVien
+create proc inserted
+(@ma int,@pb int,@ten nvarchar(100),@ns nvarchar(100),@sdt nvarchar(20),@mail nvarchar(100), @cv nvarchar(100))
+as
+begin
+if(exists (select * from QT_NhanVien where Id_NV = @ma))
+update QT_NhanVien
+set Id_PB = @pb,TenNV = @ten,NgaySinh = @ns,SDT=@sdt,Mail=@mail,ChucVu=@cv,NgayChinhSuaGanNhat=getdate(),TKChinhSua=current_user
+where Id_NV = @ma 
+else
+insert into QT_NhanVien (Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu)
+values (@pb,@ten,@ns,@sdt,@mail,@cv)
+end
+
+drop proc inserted
+
+exec  inserted 3,1,N'Trần Thị Huyền',N'2000-06-12',N'0868316342',N'huyentran@gmail.com',N'Thư ký phó Tổng giám đốc'
+
+if(exists (select * from QT_NhanVien where Id_NV = 2)) print 'ok'
+---------------------------------------------------------------------------------------------
+create proc selected
+(@t int)
+as
+begin
+if(@t = 1)(select Id_Loai,NhomLoai,Ten,PhanLoai,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_ChiTietLoaiTS)
+if(@t = 2)(select Id_Kho,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_Kho)
+if(@t = 3)(select Id_NH,Ten,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_NhanHieu)
+if(@t = 4)(select Id_CN,Mota,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_ChucNang)
+if(@t = 5)(select Id_NQ,Ten,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen)
+if(@t = 6)(select ID,Id_CN,Id_NQ,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen_CN)
+if(@t = 7)(select ID,Id_TK,Id_NQ,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen_TK)
+if(@t = 8)(select Id_TK,TenTK,MatKhau,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_TaiKhoan)
+if(@t = 9)(select Id_PN,SoPhieuNhap,NgayNhap,Id_NV,Id_TK,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuNhap)
+if(@t = 10)(select Id_PTL,SoPhieuThanhLy,NgayThanhLy,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThanhLy)
+if(@t = 11)(select ID,Id_PTL,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThanhLy_ChiTiet)
+if(@t = 12)(select Id_PTH,SoPhieuTH,NgayThuHoi,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThuHoi)
+if(@t = 13)(select ID,Id_PTH,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThuHoi_ChiTiet)
+if(@t = 14)(select Id_PX,SoPhieuXuat,NgayXuat,ViTriSuDung,Id_PB,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuXuat)
+if(@t = 15)(select ID,Id_PX,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuXuat_ChiTiet)
+if(@t = 16)(select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QT_NhanVien)
+if(@t = 17)(select Id_PB,TenPhongBan,NgayKhoiTao,TKKhoiTao,NgayChinhSua,TKChinhSua,MucDaXoa from QT_PhongBan)
+if(@t = 18)(select Id_TS,MaTS,Id_PN,TenTS,Id_NH,Id_Loai,MoTa,Model,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QT_TaiSan)
+end
+
+drop proc selected
+
+exec  selected 16
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+create proc selectedtk
+(@t int,@h int)
+as
+begin
+if(@t = 1)(select Id_Loai,NhomLoai,Ten,PhanLoai,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_ChiTietLoaiTS where Id_Loai=@h)
+if(@t = 2)(select Id_Kho,MoTa,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_Kho where Id_Kho=@h)
+if(@t = 3)(select Id_NH,Ten,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from CT_NhanHieu where Id_NH=@h)
+if(@t = 4)(select Id_CN,Mota,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_ChucNang where Id_CN=@h)
+if(@t = 5)(select Id_NQ,Ten,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen where Id_NQ=@h)
+if(@t = 6)(select ID,Id_CN,Id_NQ,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen_CN where ID=@h)
+if(@t = 7)(select ID,Id_TK,Id_NQ,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_NhomQuyen_TK where ID=@h)
+if(@t = 8)(select Id_TK,TenTK,MatKhau,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from PQ_TaiKhoan where Id_TK=@h)
+if(@t = 9)(select Id_PN,SoPhieuNhap,NgayNhap,Id_NV,Id_TK,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuNhap where Id_PN=@h)
+if(@t = 10)(select Id_PTL,SoPhieuThanhLy,NgayThanhLy,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThanhLy where Id_PTL=@h)
+if(@t = 11)(select ID,Id_PTL,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThanhLy_ChiTiet where ID=@h)
+if(@t = 12)(select Id_PTH,SoPhieuTH,NgayThuHoi,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThuHoi where Id_PTH=@h)
+if(@t = 13)(select ID,Id_PTH,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuThuHoi_ChiTiet where ID=@h)
+if(@t = 14)(select Id_PX,SoPhieuXuat,NgayXuat,ViTriSuDung,Id_PB,Id_NV,Id_Kho,DienGiai,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuXuat where Id_PX=@h)
+if(@t = 15)(select ID,Id_PX,Id_TS,TenTS,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuXuat_ChiTiet where ID=@h)
+if(@t = 16)(select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QT_NhanVien where Id_NV=@h)
+if(@t = 17)(select Id_PB,TenPhongBan,NgayKhoiTao,TKKhoiTao,NgayChinhSua,TKChinhSua,MucDaXoa from QT_PhongBan where Id_PB=@h)
+if(@t = 18)(select Id_TS,MaTS,Id_PN,TenTS,Id_NH,Id_Loai,MoTa,Model,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QT_TaiSan where Id_TS=@h)
+end
+
+exec selectedtk 16,3
+
+drop proc selectedtk
+
+declare @t int
+select @t = 1
+case 
+when @t = 1 then (select Id_NV,Id_PB,TenNV,NgaySinh,SDT,Mail,ChucVu,NgayKhoiTao,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QT_NhanVien)
+when @t = 2 then (select ID,Id_PX,Id_TS,TenTS,NgayChinhSuaGanNhat,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa from QL_PhieuXuat_ChiTiet)
+
+
+create proc select_QL_PhieuXuat_ChiTiet
+as
+begin
+select ID,Id_PX,Id_TS,TenTS,NgayChinhSuaGanNhat,TKKhoiTao,NgayChinhSuaGanNhat,TKChinhSua,MucDaXoa
+from QL_PhieuXuat_ChiTiet
+end
+
+drop proc select_QL_PhieuXuat_ChiTiet
+
+exec  select_QL_PhieuXuat_ChiTiet
+
+exec  inserted_PQ_TaiKhoan 0, ADMIN6, 123 SELECT CAST(IDENT_CURRENT('PQ_TaiKhoan') as int)
+insert into PQ_TaiKhoan (TenTK, MatKhau)
+values( 'ADMIN3', '123')
+SELECT CAST(SCOPE_IDENTITY() as int)
+
